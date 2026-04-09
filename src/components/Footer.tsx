@@ -1,5 +1,6 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Github } from 'lucide-react';
+import Logo from './Logo';
 
 export default function Footer() {
   return (
@@ -8,12 +9,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-2">
             <div className="mb-6">
-              <img 
-                src="https://i.namu.wiki/i/llT23hGvU7I1uFm9_Ns4OafehayqioeBydNaSyql0-390KKLTbnzARjVwXLa7hpJMy6EaNq_5rPvJxd4CqrtCg.svg" 
-                alt="LS Securities" 
-                className="h-8 w-auto object-contain brightness-0 invert"
-                referrerPolicy="no-referrer"
-              />
+              <Logo inverted />
             </div>
             <p className="text-slate-400 max-w-sm mb-8 leading-relaxed">
             LS증권은 투명한 정보와 혁신적인 기술을 통해 

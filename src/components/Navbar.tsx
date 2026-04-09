@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Bell, User, Menu, X, Moon, Sun, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import Logo from './Logo';
 import { cn } from '@/src/lib/utils';
 
 const MENU_ITEMS = [
@@ -47,19 +48,14 @@ export default function Navbar({ isDarkMode, toggleDarkMode }: NavbarProps) {
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-6',
-        isScrolled ? 'glass py-5 shadow-sm' : 'bg-transparent'
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 py-4 md:px-6 md:py-6',
+        isScrolled ? 'glass py-3 md:py-5 shadow-sm' : 'bg-transparent'
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center cursor-pointer">
-          <img 
-            src="https://i.namu.wiki/i/llT23hGvU7I1uFm9_Ns4OafehayqioeBydNaSyql0-390KKLTbnzARjVwXLa7hpJMy6EaNq_5rPvJxd4CqrtCg.svg" 
-            alt="LS Securities" 
-            className="h-10 w-auto object-contain"
-            referrerPolicy="no-referrer"
-          />
+          <Logo />
         </div>
 
         {/* Desktop Menu */}
