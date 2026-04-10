@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { cn } from '@/src/lib/utils';
 
 interface LogoProps {
@@ -7,35 +7,21 @@ interface LogoProps {
 }
 
 export default function Logo({ className, inverted }: LogoProps) {
-  const [error, setError] = useState(false);
-  
-  // Using the provided URL, but with a fallback mechanism
+  // Direct URL with no-referrer policy to ensure it loads in all environments
   const logoUrl = "https://i.namu.wiki/i/llT23hGvU7I1uFm9_Ns4OafehayqioeBydNaSyql0-390KKLTbnzARjVwXLa7hpJMy6EaNq_5rPvJxd4CqrtCg.svg";
-
-  if (error) {
-    return (
-      <div className={cn("flex items-center gap-2", className)}>
-        <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center", inverted ? "bg-white text-brand-blue" : "bg-brand-blue text-white")}>
-          <span className="font-black text-xs">LS</span>
-        </div>
-        <span className={cn("text-xl font-bold font-display tracking-tighter", inverted ? "text-white" : "text-slate-900")}>
-          LS증권
-        </span>
-      </div>
-    );
-  }
 
   return (
     <img 
       src={logoUrl}
       alt="LS Securities" 
+      loading="eager"
+      decoding="async"
       className={cn(
-        "h-7 md:h-10 w-auto object-contain transition-all", 
+        "h-7 md:h-10 w-auto object-contain transition-all duration-300", 
         inverted && "brightness-0 invert", 
         className
       )}
       referrerPolicy="no-referrer"
-      onError={() => setError(true)}
     />
   );
 }
