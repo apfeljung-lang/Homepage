@@ -13,7 +13,7 @@ export default function Hero() {
     <section className="relative pt-38 pb-6 overflow-hidden min-h-[58vh]">
       {/* Background Animation */}
       <div className="absolute inset-0 -z-10 opacity-30">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <LineChart data={MOCK_DATA}>
             <Line 
               type="monotone" 
@@ -50,7 +50,7 @@ export default function Hero() {
           </h1>
           
           <p className="text-lg text-slate-600 mb-14 max-w-lg leading-relaxed">
-            LS증권과 함께 투명하고 신뢰할 수 있는 금융 여정을 시작하세요. <br />
+            함께 투명하고 신뢰할 수 있는 금융 여정을 시작하세요. <br />
             AI 기반의 정밀한 분석과 직관적인 인터페이스로 당신의 자산을 더 밝게 빛나게 합니다.
           </p>
 

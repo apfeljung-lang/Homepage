@@ -35,7 +35,7 @@ export default function ProductCuration() {
       <div className="flex items-end justify-between mb-12">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">당신을 위한 맞춤 상품</h2>
-          <p className="text-slate-500">LS증권이 엄선한 오늘의 금융 상품입니다.</p>
+          <p className="text-slate-500">전문가들이 엄선한 오늘의 금융 상품입니다.</p>
         </div>
         <button className="hidden md:flex items-center gap-2 text-brand-blue font-bold hover:gap-3 transition-all">
           전체 상품 보기 <ArrowRight className="w-5 h-5" />

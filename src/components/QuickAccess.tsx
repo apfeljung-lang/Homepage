@@ -1,21 +1,21 @@
 import React from 'react';
 import { 
   MonitorCheck, 
-  Search, 
-  RefreshCw, 
+  HelpCircle, 
   ShieldCheck, 
   LineChart, 
   Scale, 
+  Users,
   ChevronRight 
 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 
 const QUICK_MENUS = [
-  { icon: MonitorCheck, label: '계좌개설' },
-  { icon: Search, label: '잔고조회' },
-  { icon: RefreshCw, label: '입출금' },
+  { icon: MonitorCheck, label: '주식모아' },
   { icon: ShieldCheck, label: '인증센터' },
   { icon: LineChart, label: 'WTS' },
+  { icon: Users, label: '투혼 투게더' },
+  { icon: HelpCircle, label: '자주묻는질문' },
   { icon: Scale, label: '금융소비자\n보호포털' },
 ];
 
@@ -27,13 +27,13 @@ const SIDE_MENUS = [
 
 export default function QuickAccess() {
   return (
-    <section className="w-full bg-slate-900 text-white py-0 overflow-hidden">
+    <section className="w-full bg-slate-900 text-white py-0 overflow-hidden mt-8 md:mt-14">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-stretch">
         
         {/* Left: Start Section */}
-        <div className="p-8 md:w-1/4 flex flex-col justify-center items-center md:items-start text-center md:text-left border-r border-white/10">
+        <div className="p-8 md:w-52 flex flex-col justify-center items-center md:items-start text-center md:text-left border-r border-white/10 shrink-0">
           <h2 className="text-2xl font-bold font-display leading-tight mb-2">
-            LS증권 <br />
+            온라인 서비스 <br />
             시작하기
           </h2>
           <button className="flex items-center gap-1 text-sm opacity-80 hover:opacity-100 transition-opacity">
@@ -42,7 +42,7 @@ export default function QuickAccess() {
         </div>
 
         {/* Center: Main Icons */}
-        <div className="flex-1 grid grid-cols-3 sm:grid-cols-6 items-center">
+        <div className="flex-1 grid grid-cols-2 sm:grid-cols-6 items-center">
           {QUICK_MENUS.map((menu, idx) => (
             <button 
               key={idx} 
@@ -59,7 +59,7 @@ export default function QuickAccess() {
         </div>
 
         {/* Right: Side Vertical Menu */}
-        <div className="md:w-1/5 flex flex-col border-l border-white/10">
+        <div className="md:w-44 flex flex-col border-l border-white/10 shrink-0">
           {SIDE_MENUS.map((menu, idx) => (
             <button 
               key={idx} 

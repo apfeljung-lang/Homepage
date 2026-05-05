@@ -6,24 +6,24 @@ import { cn } from '@/src/lib/utils';
 
 const MENU_ITEMS = [
   {
-    name: '온라인지점',
-    sub: ['계좌개설', '이체/대체', '신용/대출', 'MY 자산 현황']
-  },
-  {
-    name: '금융상품',
-    sub: ['펀드', '채권', 'ISA', '퇴직연금(IRP)', '발행어음']
-  },
-  {
-    name: '해외시장',
-    sub: ['미국/주간거래', '소수점 투자', '글로벌 리서치', '환전 서비스']
+    name: 'MY페이지',
+    sub: ['나의 자산', '나의 활동', '뱅킹/대출 현황', '회원정보 관리']
   },
   {
     name: '투자정보',
-    sub: ['실시간 시황', 'AI 종목 추천', '고수들의 선택', '공모주 일정']
+    sub: ['시황·뉴스·공시', 'AI 종목 추천', '월간 투혼', '리서치센터', '경제지표']
   },
   {
-    name: '고객센터',
-    sub: ['자주 묻는 질문', '공지사항', '1:1 상담', '보안센터']
+    name: '트레이딩',
+    sub: ['주식/선물옵션', '조건검색', '테마/업종', '주식모아 서비스', '모의투자']
+  },
+  {
+    name: '금융상품',
+    sub: ['ETF', '펀드', '연금/ISA', 'RIA계좌']
+  },
+  {
+    name: '고객서비스',
+    sub: ['공지사항', '증명서 발급', '상담·민원', '보안센터']
   }
 ];
 
@@ -110,6 +110,9 @@ export default function Navbar({ isDarkMode, toggleDarkMode }: NavbarProps) {
             className="p-2 hover:bg-black/5 rounded-full transition-colors"
           >
             {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+          <button className="hidden sm:flex items-center gap-2 border border-brand-blue text-brand-blue px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-blue/5 transition-all hover:scale-105 active:scale-95">
+            ID 등록
           </button>
           <button className="hidden sm:flex items-center gap-2 bg-brand-blue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-blue/90 transition-all hover:scale-105 active:scale-95">
             <User className="w-4 h-4" />
