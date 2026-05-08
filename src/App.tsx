@@ -11,12 +11,26 @@ import Dashboard from './components/Dashboard';
 import ProductCuration from './components/ProductCuration';
 import InsightCenter from './components/InsightCenter';
 import Footer from './components/Footer';
+import MyPageIntro from './components/MyPageIntro';
+import InvestmentInfoIntro from './components/InvestmentInfoIntro';
+import MarketReportDetail from './components/MarketReportDetail';
+import TradingIntro from './components/TradingIntro';
+import FinancialProductsIntro from './components/FinancialProductsIntro';
+import CustomerServiceIntro from './components/CustomerServiceIntro';
 import { motion, AnimatePresence } from 'motion/react';
 import { LogIn, LogOut } from 'lucide-react';
 
+type PageView = 'home' | 'mypage' | 'investment' | 'report' | 'trading' | 'products' | 'customer';
+
 export default function App() {
+  const [currentPage, setCurrentPage] = useState<PageView>('home');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Top scroll on page change
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -29,16 +43,97 @@ export default function App() {
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDarkMode ? 'dark bg-slate-950 text-white' : 'bg-bg-light text-slate-900'}`}>
-      <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      <Navbar 
+        isDarkMode={isDarkMode} 
+        toggleDarkMode={toggleDarkMode} 
+        onNavigate={(page: PageView) => setCurrentPage(page)}
+        currentPage={currentPage}
+      />
       
       <main>
-        <Hero />
-        <QuickAccess />
-        <Dashboard isLoggedIn={isLoggedIn} />
-        
-        <ProductCuration />
-        
-        <InsightCenter />
+        <AnimatePresence mode="wait">
+          {currentPage === 'home' && (
+            <motion.div
+              key="home"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Hero onNavigate={(page: PageView) => setCurrentPage(page)} />
+              <QuickAccess />
+              <Dashboard isLoggedIn={isLoggedIn} />
+              <ProductCuration />
+              <InsightCenter />
+            </motion.div>
+          )}
+          {currentPage === 'mypage' && (
+            <motion.div
+              key="mypage"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <MyPageIntro onBack={() => setCurrentPage('home')} />
+            </motion.div>
+          )}
+          {currentPage === 'investment' && (
+            <motion.div
+              key="investment"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <InvestmentInfoIntro onBack={() => setCurrentPage('home')} />
+            </motion.div>
+          )}
+          {currentPage === 'report' && (
+            <motion.div
+              key="report"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <MarketReportDetail onBack={() => setCurrentPage('home')} />
+            </motion.div>
+          )}
+          {currentPage === 'trading' && (
+            <motion.div
+              key="trading"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <TradingIntro onBack={() => setCurrentPage('home')} />
+            </motion.div>
+          )}
+          {currentPage === 'products' && (
+            <motion.div
+              key="products"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <FinancialProductsIntro onBack={() => setCurrentPage('home')} />
+            </motion.div>
+          )}
+          {currentPage === 'customer' && (
+            <motion.div
+              key="customer"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <CustomerServiceIntro onBack={() => setCurrentPage('home')} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Floating Login Toggle for Demo */}
         <div className="fixed bottom-8 right-8 z-50">

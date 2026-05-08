@@ -33,7 +33,7 @@ export default function Dashboard({ isLoggedIn }: DashboardProps) {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <h2 className="text-2xl font-bold mb-2">
-                  김루시드님, 오늘 내 자산은 <span className="text-rise">1.2%</span> 피어오르고 있어요 🌸
+                  송아리님, 오늘 내 자산은 <span className="text-rise">1.2%</span> 피어오르고 있어요 🌸
                 </h2>
                 <p className="text-slate-500 mb-6">최근 7일간 수익률이 시장 평균보다 0.5% 높습니다.</p>
                 

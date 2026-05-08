@@ -30,9 +30,11 @@ const MENU_ITEMS = [
 interface NavbarProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
+  onNavigate: (page: 'home' | 'mypage' | 'investment' | 'report' | 'trading' | 'products' | 'customer') => void;
+  currentPage: string;
 }
 
-export default function Navbar({ isDarkMode, toggleDarkMode }: NavbarProps) {
+export default function Navbar({ isDarkMode, toggleDarkMode, onNavigate, currentPage }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -54,7 +56,7 @@ export default function Navbar({ isDarkMode, toggleDarkMode }: NavbarProps) {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center cursor-pointer">
+        <div className="flex items-center cursor-pointer" onClick={() => onNavigate('home')}>
           <Logo />
         </div>
 
@@ -67,7 +69,25 @@ export default function Navbar({ isDarkMode, toggleDarkMode }: NavbarProps) {
               onMouseEnter={() => setActiveMenu(item.name)}
               onMouseLeave={() => setActiveMenu(null)}
             >
-              <button className="flex items-center gap-1 text-[18px] font-semibold hover:text-brand-blue transition-colors py-3">
+              <button 
+                onClick={() => {
+                  if (item.name === 'MY페이지') onNavigate('mypage');
+                  if (item.name === '투자정보') onNavigate('investment');
+                  if (item.name === '트레이딩') onNavigate('trading');
+                  if (item.name === '금융상품') onNavigate('products');
+                  if (item.name === '고객서비스') onNavigate('customer');
+                }}
+                className={cn(
+                  "flex items-center gap-1 text-[18px] font-semibold transition-colors py-3",
+                  (item.name === 'MY페이지' && currentPage === 'mypage') || 
+                  (item.name === '투자정보' && currentPage === 'investment') ||
+                  (item.name === '트레이딩' && currentPage === 'trading') ||
+                  (item.name === '금융상품' && currentPage === 'products') ||
+                  (item.name === '고객서비스' && currentPage === 'customer')
+                    ? "text-brand-blue" 
+                    : "hover:text-brand-blue"
+                )}
+              >
                 {item.name}
                 <ChevronDown className={cn("w-4 h-4 transition-transform", activeMenu === item.name && "rotate-180")} />
               </button>
@@ -84,6 +104,20 @@ export default function Navbar({ isDarkMode, toggleDarkMode }: NavbarProps) {
                       <a
                         key={subItem}
                         href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const navMap: Record<string, any> = {
+                            'MY페이지': 'mypage',
+                            '투자정보': 'investment',
+                            '트레이딩': 'trading',
+                            '금융상품': 'products',
+                            '고객서비스': 'customer'
+                          };
+                          if (navMap[item.name]) {
+                            onNavigate(navMap[item.name]);
+                            setActiveMenu(null);
+                          }
+                        }}
                         className="block px-4 py-2.5 text-[15px] font-medium hover:bg-brand-blue/5 hover:text-brand-blue rounded-lg transition-colors"
                       >
                         {subItem}
@@ -139,10 +173,55 @@ export default function Navbar({ isDarkMode, toggleDarkMode }: NavbarProps) {
             <div className="p-6 space-y-6">
               {MENU_ITEMS.map((item) => (
                 <div key={item.name} className="space-y-3">
-                  <h3 className="font-bold text-brand-blue">{item.name}</h3>
+                  <h3 
+                    className={cn(
+                      "font-bold cursor-pointer",
+                      ['mypage', 'investment', 'trading', 'products', 'customer'].some(p => p === currentPage) && 
+                      (
+                        (item.name === 'MY페이지' && currentPage === 'mypage') ||
+                        (item.name === '투자정보' && currentPage === 'investment') ||
+                        (item.name === '트레이딩' && currentPage === 'trading') ||
+                        (item.name === '금융상품' && currentPage === 'products') ||
+                        (item.name === '고객서비스' && currentPage === 'customer')
+                      ) ? "text-brand-blue" : "text-brand-blue"
+                    )}
+                    onClick={() => {
+                      const navMap: Record<string, any> = {
+                        'MY페이지': 'mypage',
+                        '투자정보': 'investment',
+                        '트레이딩': 'trading',
+                        '금융상품': 'products',
+                        '고객서비스': 'customer'
+                      };
+                      if (navMap[item.name]) {
+                        onNavigate(navMap[item.name]);
+                        setIsMobileMenuOpen(false);
+                      }
+                    }}
+                  >
+                    {item.name}
+                  </h3>
                   <div className="grid grid-cols-2 gap-2">
                     {item.sub.map((subItem) => (
-                      <a key={subItem} href="#" className="text-sm text-slate-600 hover:text-brand-blue">
+                      <a 
+                        key={subItem} 
+                        href="#" 
+                        className="text-sm text-slate-600 hover:text-brand-blue"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const navMap: Record<string, any> = {
+                            'MY페이지': 'mypage',
+                            '투자정보': 'investment',
+                            '트레이딩': 'trading',
+                            '금융상품': 'products',
+                            '고객서비스': 'customer'
+                          };
+                          if (navMap[item.name]) {
+                            onNavigate(navMap[item.name]);
+                            setIsMobileMenuOpen(false);
+                          }
+                        }}
+                      >
                         {subItem}
                       </a>
                     ))}

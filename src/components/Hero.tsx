@@ -8,7 +8,11 @@ const MOCK_DATA = Array.from({ length: 20 }, (_, i) => ({
   value: 4000 + Math.random() * 500 + Math.sin(i / 2) * 200
 }));
 
-export default function Hero() {
+interface HeroProps {
+  onNavigate?: (page: 'report') => void;
+}
+
+export default function Hero({ onNavigate }: HeroProps) {
   return (
     <section className="relative pt-38 pb-6 overflow-hidden min-h-[58vh]">
       {/* Background Animation */}
@@ -117,7 +121,10 @@ export default function Hero() {
             </div>
 
             {/* Call to Action */}
-            <button className="w-full mt-6 py-4 rounded-2xl bg-brand-blue/5 text-brand-blue font-bold text-sm hover:bg-brand-blue/10 transition-colors flex items-center justify-center gap-2">
+            <button 
+              onClick={() => onNavigate?.('report')}
+              className="w-full mt-6 py-4 rounded-2xl bg-brand-blue/5 text-brand-blue font-bold text-sm hover:bg-brand-blue/10 transition-colors flex items-center justify-center gap-2"
+            >
               상세 리포트 읽기
               <ArrowRight className="w-4 h-4" />
             </button>
