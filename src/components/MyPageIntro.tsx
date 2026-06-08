@@ -20,32 +20,25 @@ interface MyPageIntroProps {
 
 const SUB_MENUS = [
   {
-    title: '나의 자산',
-    description: '보유하신 모든 계좌의 통합 잔액과 포트폴리오 현황을 한눈에 확인하세요.',
+    title: 'MY투자',
+    description: '고객님의 투자 자산 현황, 포트폴리오 분석 및 맞춤형 종합 리포트를 관리하세요.',
     icon: Wallet,
     color: 'bg-blue-50 text-blue-600',
-    items: ['통합 자산 현황', '포트폴리오 분석', '나의 계좌 관리']
+    items: ['종합 자산 현황', '포트폴리오 분석', '나의 투자 리포트']
   },
   {
-    title: '나의 활동',
-    description: '투자 분석 리포트, 나의 혜택 정보 및 안전한 계정 관리를 위한 로그인 이력을 확인하세요.',
-    icon: History,
-    color: 'bg-emerald-50 text-emerald-600',
-    items: ['투자 리포트', 'MY 혜택', '로그인 이력']
-  },
-  {
-    title: '뱅킹/대출 현황',
-    description: '간편 이체부터 대출 신청 및 상환 현황까지 금융 여정을 관리하세요.',
-    icon: CreditCard,
-    color: 'bg-amber-50 text-amber-600',
-    items: ['이체/송금', '대출 서비스', '뱅킹 설정']
-  },
-  {
-    title: '회원정보 관리',
-    description: '개인정보 수정, 보안 설정 및 알림 서비를 통해 계정을 안전하게 보호하세요.',
+    title: '개인정보관리',
+    description: '안전한 거래를 위해 주소, 연락처 등의 기본 정보를 수정하고 계정 보안 수준을 설정합니다.',
     icon: UserCog,
     color: 'bg-purple-50 text-purple-600',
-    items: ['개인정보 수정', '보안 센터', '알림 설정']
+    items: ['기본 회원정보 수정', '비밀번호 및 보안카드', '마케팅 수집 동의']
+  },
+  {
+    title: '혜택/이벤트',
+    description: '고객님께 맞춰진 등급별 수수료 혜택 및 푸짐한 진행 중 이벤트를 빠짐없이 즐겨보세요.',
+    icon: History,
+    color: 'bg-emerald-50 text-emerald-600',
+    items: ['나의 수수료 혜택', '진행 중인 이벤트', '당첨자 및 사은품']
   }
 ];
 

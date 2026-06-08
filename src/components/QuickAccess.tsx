@@ -11,8 +11,8 @@ import {
 import { cn } from '@/src/lib/utils';
 
 const QUICK_MENUS = [
-  { icon: MonitorCheck, label: '주식모아' },
-  { icon: ShieldCheck, label: '인증센터' },
+  { icon: MonitorCheck, label: '계좌개설' },
+  { icon: ShieldCheck, label: '주식모아' },
   { icon: LineChart, label: 'WTS' },
   { icon: Users, label: '투혼 투게더' },
   { icon: HelpCircle, label: '자주묻는질문' },

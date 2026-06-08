@@ -31,7 +31,7 @@ const PRODUCTS = [
 
 export default function ProductCuration() {
   return (
-    <section className="py-24 max-w-7xl mx-auto px-6">
+    <section className="pt-16 pb-24 max-w-7xl mx-auto px-6">
       <div className="flex items-end justify-between mb-12">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">당신을 위한 맞춤 상품</h2>

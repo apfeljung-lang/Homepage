@@ -24,32 +24,25 @@ interface TradingIntroProps {
 
 const TRADING_SECTIONS = [
   {
-    title: '주요 거래 상품',
-    description: '국내외 주식부터 선물옵션까지, LS증권이 제공하는 핵심 매매 서비스를 한눈에 확인하세요.',
+    title: '매매시스템',
+    description: 'PC, 모바일, 웹 등 모든 채널에서 최고의 속도와 안정성을 갖춘 매매 플랫폼을 제공합니다.',
     icon: BarChart2,
     color: 'bg-blue-50 text-blue-600',
-    items: ['국내주식', '해외주식', '국내선물옵션', '해외선물옵션']
+    items: ['MTS 투혼 (Mobile)', 'HTS 하이웨이 (PC)', 'WTS 웹 트레이딩', 'API 트레이딩 시스템']
   },
   {
-    title: '스마트 분석/검색',
-    description: '강력한 조건검색과 실시간 테마 분석으로 최적의 투자 기회를 포착하세요.',
+    title: '매매가이드',
+    description: '투자의 기초부터 전문가용 다양한 매매 기법과 주문 기능 사용법을 쉽게 안내합니다.',
     icon: Search,
     color: 'bg-indigo-50 text-indigo-600',
-    items: ['조건검색', '테마/업종']
+    items: ['초보자 가이드', '고급 오더 유형 가이드', '수수료/거래세 안내']
   },
   {
-    title: '주식모아서비스',
-    description: '원하는 종목을 원하는 주기로 꾸준히, 스마트하게 자산을 쌓아가는 적립식 투자 서비스입니다.',
+    title: '계좌개설',
+    description: '영업점 방문 없이 스마트폰 하나로 빠르고 간편하게 비대면 계좌를 준비하세요.',
     icon: Target,
     color: 'bg-emerald-50 text-emerald-600',
-    items: ['주식모아서비스']
-  },
-  {
-    title: '투자 학습/체험',
-    description: '실제 시장과 동일한 환경에서의 모의투자를 통해 실전 감각을 익히고 전략을 테스트하세요.',
-    icon: GraduationCap,
-    color: 'bg-purple-50 text-purple-600',
-    items: ['모의투자']
+    items: ['비대면 계좌개설 신청', '계좌 개설 절차 안내', '외화/연금계좌 추가 개설']
   }
 ];
 

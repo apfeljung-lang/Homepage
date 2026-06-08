@@ -1,42 +1,53 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { 
-  PiggyBank, 
-  Coins, 
-  LineChart, 
-  ShieldCheck, 
-  Landmark, 
+  Building2, 
+  Wallet, 
+  BookOpen, 
+  Calendar, 
   ChevronRight, 
   ArrowUpRight,
-  PieChart,
-  Percent,
   TrendingUp,
-  FileText
+  FileSpreadsheet
 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 
-interface FinancialProductsIntroProps {
+interface BusinessGuideIntroProps {
   onBack: () => void;
 }
 
-const PRODUCT_SECTIONS = [
+const GUIDE_SECTIONS = [
   {
-    title: '상품',
-    description: '고객님의 세분화된 투자 목적에 최적화된 고효율 금융상품 라인업을 제시합니다.',
-    icon: PieChart,
-    color: 'bg-emerald-50 text-emerald-600',
-    items: ['펀드/ETF', '채권/RP', '퇴직연금(IRP/DC)', '중개형 ISA/절세상품']
+    title: '계좌개설',
+    description: '쉽고 빠른 비대면 계좌개설 방법 및 영업점, 제휴은행 개설 안내를 확인하세요.',
+    icon: Building2,
+    color: 'bg-indigo-50 text-indigo-600',
+    items: ['비대면 계좌개설', '제휴 은행 안내', '구비서류 확인']
   },
   {
-    title: '서비스',
-    description: '수익률 극대화와 리스크 최소화를 위한 프리미엄 디지털 자산관리 헬퍼입니다.',
-    icon: Landmark,
+    title: '뱅킹',
+    description: '안전하고 신속한 이체, 대체 업무 및 외화 송금, 환전 서비스를 안내합니다.',
+    icon: Wallet,
+    color: 'bg-emerald-50 text-emerald-600',
+    items: ['이체/대체', '외화 송금/환전', '뱅킹수수료 안내', '자동이체 신청']
+  },
+  {
+    title: '거래가이드',
+    description: '성공적인 첫 걸음을 위한 상품별 거래 시간, 증거금, 세금 제도를 명쾌하게 가이드합니다.',
+    icon: BookOpen,
+    color: 'bg-amber-50 text-amber-600',
+    items: ['주식 거래 시작하기', '증거금/신용 가이드', '수수료 및 거래세']
+  },
+  {
+    title: '청약',
+    description: '공모주, 실권주 청약 일정 및 자격 조건, 신청 방법에 대해 쉽고 친절하게 설명합니다.',
+    icon: Calendar,
     color: 'bg-blue-50 text-blue-600',
-    items: ['포트폴리오 맞춤 자문', 'AI 주식모아 서비스', '실시간 원격 진단', '일대일 전문 상담 서비스']
+    items: ['공모주 청약 가이드', '오늘의 청약 일정', '청약 자격 및 한도']
   }
 ];
 
-export default function FinancialProductsIntro({ onBack }: FinancialProductsIntroProps) {
+export default function BusinessGuideIntro({ onBack }: BusinessGuideIntroProps) {
   return (
     <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
       <motion.div 
@@ -45,22 +56,23 @@ export default function FinancialProductsIntro({ onBack }: FinancialProductsIntr
         className="mb-12"
       >
         <button 
+          id="btn-guide-back"
           onClick={onBack}
           className="text-slate-400 hover:text-brand-blue mb-4 flex items-center gap-1 transition-colors group"
         >
           <ChevronRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
           홈으로 돌아가기
         </button>
-        <h1 className="text-4xl font-bold mb-4 font-display">상품서비스</h1>
+        <h1 className="text-4xl font-bold mb-4 font-display">업무안내</h1>
         <p className="text-slate-500 text-lg max-w-2xl leading-relaxed">
-          고객님의 투자 성향과 생애 주기에 맞춘 최적의 자산 구성과 프리미엄 가치, <br />
-          LS증권의 검증된 상품과 스마트 솔루션이 함께합니다.
+          고객님의 원활한 거래를 돕기 위한 행정적인 업무 처리 절차와 <br />
+          신속한 뱅킹 가이드를 정확하고 친절하게 정리해 드립니다.
         </p>
       </motion.div>
 
       {/* Grid of Sections */}
       <div className="grid md:grid-cols-2 gap-6 mb-16">
-        {PRODUCT_SECTIONS.map((section, index) => (
+        {GUIDE_SECTIONS.map((section, index) => (
           <motion.div
             key={section.title}
             initial={{ opacity: 0, y: 20 }}
@@ -77,22 +89,29 @@ export default function FinancialProductsIntro({ onBack }: FinancialProductsIntr
                 {section.description}
               </p>
               <div className="space-y-2 mb-8">
-                {section.items.map((item) => (
-                  <div key={item} className="flex items-center justify-between p-3 rounded-xl bg-slate-50/50 hover:bg-slate-50 transition-colors cursor-pointer group/item">
+                {section.items.map((item, idx) => (
+                  <div 
+                    key={item} 
+                    id={`guide-item-${index}-${idx}`}
+                    className="flex items-center justify-between p-3 rounded-xl bg-slate-50/50 hover:bg-slate-50 transition-colors cursor-pointer group/item"
+                  >
                     <span className="text-sm font-medium text-slate-700">{item}</span>
                     <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover/item:text-brand-blue transition-colors" />
                   </div>
                 ))}
               </div>
             </div>
-            <button className="w-full py-4 bg-brand-blue/5 text-brand-blue font-bold rounded-2xl hover:bg-brand-blue transition-all hover:text-white flex items-center justify-center gap-2">
-              상품 정보 더보기 <ChevronRight className="w-4 h-4" />
+            <button 
+              id={`btn-guide-start-${index}`}
+              className="w-full py-4 bg-brand-blue/5 text-brand-blue font-bold rounded-2xl hover:bg-brand-blue transition-all hover:text-white flex items-center justify-center gap-2"
+            >
+              업무 안내 시작하기 <ChevronRight className="w-4 h-4" />
             </button>
           </motion.div>
         ))}
       </div>
 
-      {/* Trust & Solution Banner */}
+      {/* Trust Banner */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -102,31 +121,20 @@ export default function FinancialProductsIntro({ onBack }: FinancialProductsIntr
         <div className="relative z-10 grid md:grid-cols-3 gap-12 items-center">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 text-brand-blue font-bold mb-4">
-              <ShieldCheck className="w-5 h-5" />
-              <span>검증된 자산관리 솔루션</span>
+              <FileSpreadsheet className="w-5 h-5" />
+              <span>신속한 행정 처리</span>
             </div>
             <h2 className="text-3xl font-bold mb-6 font-display leading-tight text-slate-900">
-              어려운 금융상품 선택, <br />
-              LS증권의 '투론'이 길잡이가 되어 드립니다.
+              필요 서류 준비부터 제출까지, <br />
+              비대면 자동화 시스템으로 시간을 절약하세요.
             </h2>
-            <div className="flex flex-wrap gap-6 text-slate-400">
-              <div className="flex items-center gap-2">
-                <FileText className="w-4 h-4" />
-                <span className="text-sm">월간 자산관리 리포트</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4" />
-                <span className="text-sm">수익률 시뮬레이션</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Coins className="w-4 h-4" />
-                <span className="text-sm">실시간 시장 변동성 대응</span>
-              </div>
-            </div>
           </div>
           <div className="flex md:justify-end">
-            <button className="bg-brand-blue text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-all shadow-lg hover:shadow-brand-blue/20">
-              맞춤 상품 찾기
+            <button 
+              id="btn-guide-document-check"
+              className="bg-brand-blue text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-all shadow-lg hover:shadow-brand-blue/20"
+            >
+              자주 묻는 업무 질문
             </button>
           </div>
         </div>

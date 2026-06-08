@@ -21,32 +21,32 @@ interface InvestmentInfoIntroProps {
 
 const INVESTMENT_SECTIONS = [
   {
-    title: '시황·뉴스·공시',
-    description: '실시간으로 업데이트되는 국내외 증시 상황과 주요 경제 뉴스를 가장 빠르게 전달합니다.',
-    icon: Newspaper,
-    color: 'bg-indigo-50 text-indigo-600',
-    items: ['실시간 국내 증시', '해외 증시 요약', '주요 경제 뉴스', '기업 공시 정보']
-  },
-  {
-    title: 'AI 종목 추천',
-    description: '빅데이터와 고도화된 알고리즘을 통해 고객님의 투자 성향에 딱 맞는 유망 종목을 제안합니다.',
-    icon: BrainCircuit,
-    color: 'bg-purple-50 text-purple-600',
-    items: ['AI 테마 탐색', '오늘의 급등주 예측', '수급 분석 리포트', '종목별 투자의견']
-  },
-  {
-    title: '경제지표 & 리서치',
-    description: '글로벌 거시 경제 지표와 전문 애널리스트들의 깊이 있는 시장 분석 리포트를 확인하세요.',
+    title: '리서치 & 보고서',
+    description: '전문가들이 제시하는 수준 높은 마켓 인사이트와 고화질 종합 분석 보고서입니다.',
     icon: BarChart3,
     color: 'bg-rose-50 text-rose-600',
-    items: ['글로벌 경제지표', '산업·테마 리서치', '기업 분석 상세', '데일리 리포트']
+    items: ['리서치', '한경REPORT']
   },
   {
-    title: '투자 가이드',
-    description: '초보자부터 전문가까지, 단계별 금융 지식과 효율적인 투자 전략을 교육 콘텐츠와 함께 제공합니다.',
-    icon: GraduationCap,
-    color: 'bg-emerald-50 text-emerald-600',
-    items: ['금융 기초 지식', '월간 투혼', '용어 사전', '절세 가이드']
+    title: '투혼 소식 & 뉴스',
+    description: '실시간 주요 이슈, 맞춤 뉴스 및 함께 성장하는 투혼 커뮤니티 공간입니다.',
+    icon: Newspaper,
+    color: 'bg-indigo-50 text-indigo-600',
+    items: ['투혼투게더', '뉴스/공시']
+  },
+  {
+    title: '해외 투자 동향',
+    description: '글로벌 주요국 지수 움직임과 깊이 있는 전 세계 테마 투자 포인트를 취합합니다.',
+    icon: Globe,
+    color: 'bg-blue-50 text-blue-600',
+    items: ['해외증시', '해외투자정보']
+  },
+  {
+    title: '증시 일정 & 인텔리전스',
+    description: '주요일정 안내 및 AI 알고리즘 스토어로 완성하는 완벽한 매매 시뮬레이션입니다.',
+    icon: BrainCircuit,
+    color: 'bg-purple-50 text-purple-600',
+    items: ['증시캘린더', '이슈캘린더', '로보스토어']
   }
 ];
 

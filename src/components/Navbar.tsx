@@ -6,33 +6,46 @@ import { cn } from '@/src/lib/utils';
 
 const MENU_ITEMS = [
   {
-    name: 'MY페이지',
-    sub: ['나의 자산', '나의 활동', '뱅킹/대출 현황', '회원정보 관리']
+    name: '트레이딩',
+    sub: ['매매시스템', '매매가이드', '계좌개설']
+  },
+  {
+    name: '상품서비스',
+    sub: ['상품', '서비스']
+  },
+  {
+    name: '업무안내',
+    sub: ['계좌개설', '뱅킹', '거래가이드', '청약']
   },
   {
     name: '투자정보',
-    sub: ['시황·뉴스·공시', 'AI 종목 추천', '월간 투혼', '리서치센터', '경제지표']
+    sub: ['리서치', '투혼투게더', '한경REPORT', '뉴스/공시', '해외증시', '해외투자정보', '증시캘린더', '이슈캘린더', '로보스토어']
   },
   {
-    name: '트레이딩',
-    sub: ['주식/선물옵션', '조건검색', '테마/업종', '주식모아 서비스', '모의투자']
+    name: '고객센터',
+    sub: ['고객지원', '금융소비자보호']
   },
   {
-    name: '금융상품',
-    sub: ['ETF', '펀드', '연금/ISA', 'RIA계좌']
-  },
-  {
-    name: '고객서비스',
-    sub: ['공지사항', '증명서 발급', '상담·민원', '보안센터']
+    name: 'MY페이지',
+    sub: ['MY투자', '개인정보관리', '혜택/이벤트']
   }
 ];
 
 interface NavbarProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
-  onNavigate: (page: 'home' | 'mypage' | 'investment' | 'report' | 'trading' | 'products' | 'customer') => void;
+  onNavigate: (page: 'home' | 'mypage' | 'investment' | 'report' | 'trading' | 'products' | 'customer' | 'guide') => void;
   currentPage: string;
 }
+
+const NAV_MAP: Record<string, 'mypage' | 'investment' | 'trading' | 'products' | 'customer' | 'guide'> = {
+  '트레이딩': 'trading',
+  '상품서비스': 'products',
+  '업무안내': 'guide',
+  '투자정보': 'investment',
+  '고객센터': 'customer',
+  'MY페이지': 'mypage'
+};
 
 export default function Navbar({ isDarkMode, toggleDarkMode, onNavigate, currentPage }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -71,19 +84,12 @@ export default function Navbar({ isDarkMode, toggleDarkMode, onNavigate, current
             >
               <button 
                 onClick={() => {
-                  if (item.name === 'MY페이지') onNavigate('mypage');
-                  if (item.name === '투자정보') onNavigate('investment');
-                  if (item.name === '트레이딩') onNavigate('trading');
-                  if (item.name === '금융상품') onNavigate('products');
-                  if (item.name === '고객서비스') onNavigate('customer');
+                  const target = NAV_MAP[item.name];
+                  if (target) onNavigate(target);
                 }}
                 className={cn(
                   "flex items-center gap-1 text-[18px] font-semibold transition-colors py-3",
-                  (item.name === 'MY페이지' && currentPage === 'mypage') || 
-                  (item.name === '투자정보' && currentPage === 'investment') ||
-                  (item.name === '트레이딩' && currentPage === 'trading') ||
-                  (item.name === '금융상품' && currentPage === 'products') ||
-                  (item.name === '고객서비스' && currentPage === 'customer')
+                  currentPage === NAV_MAP[item.name]
                     ? "text-brand-blue" 
                     : "hover:text-brand-blue"
                 )}
@@ -106,15 +112,9 @@ export default function Navbar({ isDarkMode, toggleDarkMode, onNavigate, current
                         href="#"
                         onClick={(e) => {
                           e.preventDefault();
-                          const navMap: Record<string, any> = {
-                            'MY페이지': 'mypage',
-                            '투자정보': 'investment',
-                            '트레이딩': 'trading',
-                            '금융상품': 'products',
-                            '고객서비스': 'customer'
-                          };
-                          if (navMap[item.name]) {
-                            onNavigate(navMap[item.name]);
+                          const target = NAV_MAP[item.name];
+                          if (target) {
+                            onNavigate(target);
                             setActiveMenu(null);
                           }
                         }}
@@ -146,11 +146,11 @@ export default function Navbar({ isDarkMode, toggleDarkMode, onNavigate, current
             {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <button className="hidden sm:flex items-center gap-2 border border-brand-blue text-brand-blue px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-blue/5 transition-all hover:scale-105 active:scale-95">
-            ID 등록
+            로그인
           </button>
           <button className="hidden sm:flex items-center gap-2 bg-brand-blue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-blue/90 transition-all hover:scale-105 active:scale-95">
             <User className="w-4 h-4" />
-            로그인
+            거래하기
           </button>
           <button 
             className="lg:hidden p-2 hover:bg-black/5 rounded-full transition-colors"
@@ -176,25 +176,12 @@ export default function Navbar({ isDarkMode, toggleDarkMode, onNavigate, current
                   <h3 
                     className={cn(
                       "font-bold cursor-pointer",
-                      ['mypage', 'investment', 'trading', 'products', 'customer'].some(p => p === currentPage) && 
-                      (
-                        (item.name === 'MY페이지' && currentPage === 'mypage') ||
-                        (item.name === '투자정보' && currentPage === 'investment') ||
-                        (item.name === '트레이딩' && currentPage === 'trading') ||
-                        (item.name === '금융상품' && currentPage === 'products') ||
-                        (item.name === '고객서비스' && currentPage === 'customer')
-                      ) ? "text-brand-blue" : "text-brand-blue"
+                      currentPage === NAV_MAP[item.name] ? "text-brand-blue" : "text-slate-900 dark:text-white"
                     )}
                     onClick={() => {
-                      const navMap: Record<string, any> = {
-                        'MY페이지': 'mypage',
-                        '투자정보': 'investment',
-                        '트레이딩': 'trading',
-                        '금융상품': 'products',
-                        '고객서비스': 'customer'
-                      };
-                      if (navMap[item.name]) {
-                        onNavigate(navMap[item.name]);
+                      const target = NAV_MAP[item.name];
+                      if (target) {
+                        onNavigate(target);
                         setIsMobileMenuOpen(false);
                       }
                     }}
@@ -209,15 +196,9 @@ export default function Navbar({ isDarkMode, toggleDarkMode, onNavigate, current
                         className="text-sm text-slate-600 hover:text-brand-blue"
                         onClick={(e) => {
                           e.preventDefault();
-                          const navMap: Record<string, any> = {
-                            'MY페이지': 'mypage',
-                            '투자정보': 'investment',
-                            '트레이딩': 'trading',
-                            '금융상품': 'products',
-                            '고객서비스': 'customer'
-                          };
-                          if (navMap[item.name]) {
-                            onNavigate(navMap[item.name]);
+                          const target = NAV_MAP[item.name];
+                          if (target) {
+                            onNavigate(target);
                             setIsMobileMenuOpen(false);
                           }
                         }}

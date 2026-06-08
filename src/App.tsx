@@ -9,6 +9,7 @@ import Hero from './components/Hero';
 import QuickAccess from './components/QuickAccess';
 import Dashboard from './components/Dashboard';
 import ProductCuration from './components/ProductCuration';
+import ToohonTogether from './components/ToohonTogether';
 import InsightCenter from './components/InsightCenter';
 import Footer from './components/Footer';
 import MyPageIntro from './components/MyPageIntro';
@@ -17,10 +18,11 @@ import MarketReportDetail from './components/MarketReportDetail';
 import TradingIntro from './components/TradingIntro';
 import FinancialProductsIntro from './components/FinancialProductsIntro';
 import CustomerServiceIntro from './components/CustomerServiceIntro';
+import BusinessGuideIntro from './components/BusinessGuideIntro';
 import { motion, AnimatePresence } from 'motion/react';
 import { LogIn, LogOut } from 'lucide-react';
 
-type PageView = 'home' | 'mypage' | 'investment' | 'report' | 'trading' | 'products' | 'customer';
+type PageView = 'home' | 'mypage' | 'investment' | 'report' | 'trading' | 'products' | 'customer' | 'guide';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageView>('home');
@@ -63,6 +65,7 @@ export default function App() {
               <Hero onNavigate={(page: PageView) => setCurrentPage(page)} />
               <QuickAccess />
               <Dashboard isLoggedIn={isLoggedIn} />
+              <ToohonTogether />
               <ProductCuration />
               <InsightCenter />
             </motion.div>
@@ -131,6 +134,17 @@ export default function App() {
               transition={{ duration: 0.3 }}
             >
               <CustomerServiceIntro onBack={() => setCurrentPage('home')} />
+            </motion.div>
+          )}
+          {currentPage === 'guide' && (
+            <motion.div
+              key="guide"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <BusinessGuideIntro onBack={() => setCurrentPage('home')} />
             </motion.div>
           )}
         </AnimatePresence>

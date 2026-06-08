@@ -21,32 +21,18 @@ interface CustomerServiceIntroProps {
 
 const SERVICE_SECTIONS = [
   {
-    title: '고객지원센터',
-    description: '궁금하신 사항을 신속하게 해결해 드립니다. 전화, 온라인 문의 등 다양한 채널이 열려 있습니다.',
+    title: '고객지원',
+    description: '1:1 상담, 대표 전화 연결, 원격 지원 및 온라인 자주 찾는 질문을 통해 빠른 문제 해결을 도모합니다.',
     icon: Headphones,
     color: 'bg-indigo-50 text-indigo-600',
-    items: ['자주 묻는 질문(FAQ)', '1:1 상담 문의', '전화 상담 안내', '원격 지원 서비스']
+    items: ['자주 묻는 질문(FAQ)', '1:1 친절 문의', '전명 예약 상담/전화 지원', '원격 피씨/모바일 점검 지원']
   },
   {
-    title: '공지/이벤트',
-    description: 'LS증권의 새로운 소식과 진행중인 다양한 혜택을 놓치지 말고 확인하세요.',
-    icon: Bell,
-    color: 'bg-amber-50 text-amber-600',
-    items: ['주요 공지사항', '진행중인 이벤트', '당첨자 발표', '증권사 뉴스']
-  },
-  {
-    title: '업무/보안 설정',
-    description: '안전한 금융 거래를 위해 보안 매체를 관리하고 주요 업무를 온라인으로 간편하게 처리하세요.',
+    title: '금융소비자보호',
+    description: '고객님의 소중한 금융권 권익을 지키기 위한 보호 헌장과 불법 피해 신고, 투명한 민원 보상 체계입니다.',
     icon: ShieldAlert,
     color: 'bg-rose-50 text-rose-600',
-    items: ['보안카드/OTP 등록', '인증 센터', '사고 신고', '개인정보 보호 설정']
-  },
-  {
-    title: '가이드/약관',
-    description: '서비스 이용을 위한 상세 가이드와 투명한 약관 정보를 제공합니다.',
-    icon: FileSearch,
-    color: 'bg-slate-50 text-slate-600',
-    items: ['초보자 가이드', '약관 및 유의사항', '수수료 안내', '서식/자료실']
+    items: ['소비자보호체계', '민원/불편 접수 센터', '전자 민원 가이드', '피해 예방 유의사항']
   }
 ];
 
@@ -65,10 +51,10 @@ export default function CustomerServiceIntro({ onBack }: CustomerServiceIntroPro
           <ChevronRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
           홈으로 돌아가기
         </button>
-        <h1 className="text-4xl font-bold mb-4 font-display">고객서비스</h1>
+        <h1 className="text-4xl font-bold mb-4 font-display">고객센터</h1>
         <p className="text-slate-500 text-lg max-w-2xl leading-relaxed">
-          고객님의 목소리에 귀 기울이며, <br />
-          더 안전하고 편리한 금융 서비스 경험을 위해 최선을 다하겠습니다.
+          고객님의 원활하고 믿을 수 있는 금융 환경 조성을 위해 <br />
+          언제나 귀 기울이고 소중한 소통을 이어가겠습니다.
         </p>
       </motion.div>
 
