@@ -1,12 +1,169 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, TrendingUp, Zap } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, Sparkles, TrendingUp, Zap, Smartphone, Monitor, Globe, ChevronLeft, ChevronRight } from 'lucide-react';
 import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
 import { cn } from '@/src/lib/utils';
 
 const MOCK_DATA = Array.from({ length: 20 }, (_, i) => ({
   value: 4000 + Math.random() * 500 + Math.sin(i / 2) * 200
 }));
+
+const CAROUSEL_SLIDES = [
+  {
+    id: 'wts',
+    badge: 'WTS',
+    icon: Globe,
+    title: '투혼 WTS (Web Trading System)',
+    desc: 'PC, 태블릿, 스마트폰 브라우저에서 별도 프로그램이나 앱 설치 없이 접속하여 언제 어디서나 안전하고 편리하게 거래할 수 있는 차세대 트레이딩 시스템입니다.',
+    img: '/src/assets/images/wts_intro_1782276920204.jpg',
+    colorClass: 'text-brand-blue bg-brand-blue/10'
+  },
+  {
+    id: 'hts',
+    badge: 'HTS',
+    icon: Monitor,
+    title: '투혼 HTS (Home Trading System)',
+    desc: '풍부하고 강력한 차트 분석 툴과 실시간 호가, 쾌속 주문 기능까지 탑재하여 초보부터 프로 투자자까지 모두 만족시키는 데스크톱 전용 통합 매매 프로그램입니다.',
+    img: '/src/assets/images/hts_intro_1782276932203.jpg',
+    colorClass: 'text-indigo-600 bg-indigo-50 dark:bg-indigo-950/40 dark:text-indigo-400'
+  },
+  {
+    id: 'mts',
+    badge: 'MTS',
+    icon: Smartphone,
+    title: '투혼 MTS (Mobile Trading System)',
+    desc: '다양한 거래 특화 모드와 실시간 수급 현황, 스마트 종목 검색 및 맞춤 자산 관리를 제공하여 최상의 투자를 완성하는 차세대 모바일 앱입니다.',
+    img: '/src/assets/images/mts_intro_1782276947427.jpg',
+    colorClass: 'text-brand-mint bg-brand-mint/10'
+  }
+];
+
+function TradingSystemCarousel() {
+  const [current, setCurrent] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((prev) => (prev - 1 + CAROUSEL_SLIDES.length) % CAROUSEL_SLIDES.length);
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
+  };
+
+  const activeSlide = CAROUSEL_SLIDES[current];
+  const IconComponent = activeSlide.icon;
+
+  return (
+    <div 
+      className="glass p-6 md:p-8 rounded-[40px] shadow-2xl relative z-10 overflow-hidden border border-white/40 dark:border-white/10"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Indicator & Badge Navigation */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-2">
+          {CAROUSEL_SLIDES.map((slide, idx) => (
+            <button
+              key={slide.id}
+              onClick={() => setCurrent(idx)}
+              className={cn(
+                "px-3 py-1 text-xs font-black rounded-full transition-all duration-300",
+                idx === current 
+                  ? "bg-brand-blue text-white shadow-lg shadow-brand-blue/20 scale-105" 
+                  : "bg-slate-100 dark:bg-slate-900 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              )}
+            >
+              {slide.badge}
+            </button>
+          ))}
+        </div>
+        
+        {/* Next/Prev Navigation Buttons */}
+        <div className="flex items-center gap-1.5">
+          <button 
+            onClick={handlePrev}
+            className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4 text-slate-500" />
+          </button>
+          <button 
+            onClick={handleNext}
+            className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            <ChevronRight className="w-4 h-4 text-slate-500" />
+          </button>
+        </div>
+      </div>
+
+      {/* Image Display Area with AnimatePresence */}
+      <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden mb-6 bg-slate-900 group shadow-md border border-black/5 dark:border-white/5">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={activeSlide.id}
+            src={activeSlide.img}
+            alt={activeSlide.title}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.5 }}
+            className="absolute inset-0 w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent" />
+      </div>
+
+      {/* Slide Text Content */}
+      <div className="min-h-[140px] flex flex-col justify-between">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSlide.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span className={cn("p-1.5 rounded-lg flex items-center justify-center", activeSlide.colorClass)}>
+                <IconComponent className="w-4 h-4" />
+              </span>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
+                {activeSlide.title}
+              </h3>
+            </div>
+            <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
+              {activeSlide.desc}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Carousel Dot Indicators */}
+        <div className="flex justify-center gap-1.5 mt-6">
+          {CAROUSEL_SLIDES.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrent(idx)}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-300",
+                idx === current ? "w-6 bg-brand-blue" : "w-1.5 bg-slate-200 dark:bg-slate-700"
+              )}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 interface HeroProps {
   onNavigate?: (page: 'report') => void;
@@ -70,69 +227,12 @@ export default function Hero({ onNavigate }: HeroProps) {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative"
         >
-          <div className="glass p-8 rounded-[40px] shadow-2xl relative z-10 overflow-hidden">
-            {/* AI Insight Header */}
-            <div className="flex items-start justify-between mb-8">
-              <div>
-                <div className="flex items-center gap-2 text-brand-blue font-bold text-sm mb-1">
-                  <Sparkles className="w-4 h-4" />
-                  INVESTMENT INSIGHT
-                </div>
-                <h3 className="text-2xl font-bold mb-2">오늘의 시장 핵심</h3>
-                <p className="text-slate-500 text-sm">Gemini AI가 실시간으로 분석한 투자 전략</p>
-              </div>
-              <div className="w-12 h-12 bg-brand-blue/10 rounded-2xl flex items-center justify-center">
-                <Zap className="w-6 h-6 text-brand-blue" />
-              </div>
-            </div>
-
-            {/* Insight Content */}
-            <div className="bg-slate-900 text-white rounded-3xl p-6 mb-6 relative overflow-hidden group">
-              <div className="relative z-10">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="px-2 py-1 bg-brand-mint/20 text-brand-mint text-[10px] font-bold rounded-md">HOT TOPIC</span>
-                  <span className="text-xs text-white/60">반도체 & AI 인프라</span>
-                </div>
-                <p className="text-lg font-bold leading-snug mb-4">
-                  "AI 인프라 확장에 따른 <br />
-                  <span className="text-brand-mint">하드웨어 섹터</span>의 강세가 예상됩니다."
-                </p>
-                <div className="flex items-center gap-2 text-sm text-white/70">
-                  <TrendingUp className="w-4 h-4 text-brand-mint" />
-                  반도체 장비주 주목 · 목표 수익률 +15%
-                </div>
-              </div>
-              {/* Decorative background for AI card */}
-              <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-blue/20 rounded-full blur-3xl group-hover:bg-brand-blue/30 transition-colors" />
-            </div>
-
-            {/* Keywords */}
-            <div className="grid grid-cols-3 gap-3">
-              {['#반도체_반등', '#금리인하_수혜', '#AI_인프라'].map((tag) => (
-                <div key={tag} className="bg-slate-50 border border-slate-100 p-3 rounded-2xl text-center">
-                  <span className="text-[11px] font-bold text-slate-500">{tag}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Call to Action */}
-            <button 
-              onClick={() => onNavigate?.('report')}
-              className="w-full mt-6 py-4 rounded-2xl bg-brand-blue/5 text-brand-blue font-bold text-sm hover:bg-brand-blue/10 transition-colors flex items-center justify-center gap-2"
-            >
-              상세 리포트 읽기
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Decorative Elements */}
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-blue/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-mint/10 rounded-full blur-3xl" />
+          <TradingSystemCarousel />
         </motion.div>
       </div>
     </section>

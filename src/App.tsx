@@ -8,8 +8,8 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import QuickAccess from './components/QuickAccess';
 import Dashboard from './components/Dashboard';
-import ProductCuration from './components/ProductCuration';
 import ToohonTogether from './components/ToohonTogether';
+import MarketInsightHub from './components/MarketInsightHub';
 import InsightCenter from './components/InsightCenter';
 import Footer from './components/Footer';
 import MyPageIntro from './components/MyPageIntro';
@@ -19,6 +19,7 @@ import TradingIntro from './components/TradingIntro';
 import FinancialProductsIntro from './components/FinancialProductsIntro';
 import CustomerServiceIntro from './components/CustomerServiceIntro';
 import BusinessGuideIntro from './components/BusinessGuideIntro';
+import QrLoginModal from './components/QrLoginModal';
 import { motion, AnimatePresence } from 'motion/react';
 import { LogIn, LogOut } from 'lucide-react';
 
@@ -28,6 +29,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<PageView>('home');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
     // Top scroll on page change
@@ -50,6 +52,9 @@ export default function App() {
         toggleDarkMode={toggleDarkMode} 
         onNavigate={(page: PageView) => setCurrentPage(page)}
         currentPage={currentPage}
+        isLoggedIn={isLoggedIn}
+        onLogout={() => setIsLoggedIn(false)}
+        onLoginClick={() => setIsLoginModalOpen(true)}
       />
       
       <main>
@@ -66,7 +71,7 @@ export default function App() {
               <QuickAccess />
               <Dashboard isLoggedIn={isLoggedIn} />
               <ToohonTogether />
-              <ProductCuration />
+              <MarketInsightHub onNavigate={(page: PageView) => setCurrentPage(page)} />
               <InsightCenter />
             </motion.div>
           )}
@@ -171,6 +176,13 @@ export default function App() {
       </main>
 
       <Footer />
+
+      {/* QR Code Login Modal */}
+      <QrLoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onLoginSuccess={() => setIsLoggedIn(true)}
+      />
     </div>
   );
 }

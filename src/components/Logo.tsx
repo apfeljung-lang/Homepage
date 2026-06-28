@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '@/src/lib/utils';
+// @ts-ignore
 import logoUrl from './logo.png';
 
 interface LogoProps {

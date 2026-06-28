@@ -36,6 +36,9 @@ interface NavbarProps {
   toggleDarkMode: () => void;
   onNavigate: (page: 'home' | 'mypage' | 'investment' | 'report' | 'trading' | 'products' | 'customer' | 'guide') => void;
   currentPage: string;
+  isLoggedIn: boolean;
+  onLogout: () => void;
+  onLoginClick: () => void;
 }
 
 const NAV_MAP: Record<string, 'mypage' | 'investment' | 'trading' | 'products' | 'customer' | 'guide'> = {
@@ -47,7 +50,15 @@ const NAV_MAP: Record<string, 'mypage' | 'investment' | 'trading' | 'products' |
   'MY페이지': 'mypage'
 };
 
-export default function Navbar({ isDarkMode, toggleDarkMode, onNavigate, currentPage }: NavbarProps) {
+export default function Navbar({ 
+  isDarkMode, 
+  toggleDarkMode, 
+  onNavigate, 
+  currentPage,
+  isLoggedIn,
+  onLogout,
+  onLoginClick
+}: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -145,9 +156,21 @@ export default function Navbar({ isDarkMode, toggleDarkMode, onNavigate, current
           >
             {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
-          <button className="hidden sm:flex items-center gap-2 border border-brand-blue text-brand-blue px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-blue/5 transition-all hover:scale-105 active:scale-95">
-            로그인
-          </button>
+          {isLoggedIn ? (
+            <button 
+              onClick={onLogout}
+              className="hidden sm:flex items-center gap-2 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-900 transition-all hover:scale-105 active:scale-95"
+            >
+              로그아웃
+            </button>
+          ) : (
+            <button 
+              onClick={onLoginClick}
+              className="hidden sm:flex items-center gap-2 border border-brand-blue text-brand-blue px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-blue/5 transition-all hover:scale-105 active:scale-95"
+            >
+              로그인
+            </button>
+          )}
           <button className="hidden sm:flex items-center gap-2 bg-brand-blue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-blue/90 transition-all hover:scale-105 active:scale-95">
             <User className="w-4 h-4" />
             거래하기

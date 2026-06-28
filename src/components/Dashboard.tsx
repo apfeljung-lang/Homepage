@@ -10,7 +10,10 @@ import {
   Smartphone,
   Monitor,
   Globe,
-  Code
+  Code,
+  Bell,
+  Gift,
+  ChevronRight
 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 
@@ -30,6 +33,29 @@ const POPULAR_STOCKS = [
   { rank: 2, name: 'SK하이닉스', price: '165,400', change: '+2.1%' },
   { rank: 3, name: '에코프로', price: '542,000', change: '-3.2%' },
   { rank: 4, name: '현대차', price: '242,500', change: '+0.8%' },
+];
+
+const NOTICES = [
+  { id: 1, title: '시스템 정기 점검에 따른 서비스 일시 중단 안내 (6/28)', date: '2026.06.24', category: '점검' },
+  { id: 2, title: '해외주식 실시간 시세 무료 제공 서비스 확대 시행', date: '2026.06.18', category: '서비스' },
+  { id: 3, title: '개인정보처리방침 일부 변경 및 고지 안내', date: '2026.06.10', category: '안내' },
+];
+
+const EVENTS = [
+  { 
+    id: 1, 
+    title: '신용융자 금리할인 우량종목 우대금리 5.5%', 
+    period: '2026.04.01 ~ 2026.12.31', 
+    badge: '우대금리',
+    img: '/src/assets/images/event_interest_rate_1782279198274.jpg'
+  },
+  { 
+    id: 2, 
+    title: '파워맵프로 가입하고 실시간 수급 확인하기', 
+    period: '2026.06.01 ~ 2026.07.31', 
+    badge: '가입혜택',
+    img: '/src/assets/images/event_powermap_mascot_1782279215394.jpg'
+  },
 ];
 
 export default function Dashboard({ isLoggedIn }: DashboardProps) {
@@ -133,71 +159,100 @@ export default function Dashboard({ isLoggedIn }: DashboardProps) {
             </button>
           </div>
         </div>
+      </div>
 
-        <hr className="border-slate-100 dark:border-slate-800/40" />
-
-        {/* 매매시스템 안내 영역 */}
-        <div>
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <span className="text-[12px] font-bold text-brand-blue uppercase tracking-wider bg-brand-blue/10 dark:bg-brand-blue/20 px-3 py-1 rounded-full">Trading Platforms</span>
-              <h3 className="text-2xl font-bold mt-2 text-slate-900 dark:text-white font-display">
-                매매시스템 안내
-              </h3>
-            </div>
-          </div>
-          
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-slate-50/60 dark:bg-slate-900/40 p-6 rounded-2xl border border-black/5 dark:border-white/5 hover:border-brand-blue/30 dark:hover:border-brand-blue/30 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-blue-400 flex items-center justify-center font-bold">
-                  <Smartphone className="w-5 h-5" />
+      {/* 공지사항 및 진행중인 이벤트 영역 */}
+      <div className="grid md:grid-cols-2 gap-8">
+        {/* 공지사항 */}
+        <div className="glass rounded-[32px] p-8 shadow-xl border-white/40 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-brand-blue/10 text-brand-blue flex items-center justify-center">
+                  <Bell className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-slate-900 dark:text-white text-[16px]">MTS</h4>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display">공지사항</h3>
               </div>
-              <p className="text-[14px] text-slate-500 dark:text-slate-400 leading-relaxed">
-                <strong className="text-brand-blue font-semibold">투혼(MTS)</strong>은 다양한 모드를 제공해 개인화된 투자 서비스 환경을 제공하는 LS증권의 차세대 MTS입니다.
-              </p>
+              <button className="text-sm font-semibold text-slate-400 hover:text-brand-blue flex items-center gap-1 transition-colors">
+                더보기 <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
 
-            <div className="bg-slate-50/60 dark:bg-slate-900/40 p-6 rounded-2xl border border-black/5 dark:border-white/5 hover:border-brand-blue/30 dark:hover:border-brand-blue/30 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400 flex items-center justify-center font-bold">
-                  <Monitor className="w-5 h-5" />
+            <div className="flex flex-col divide-y divide-slate-100 dark:divide-slate-800/40">
+              {NOTICES.map((notice) => (
+                <div 
+                  key={notice.id} 
+                  className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-2 group cursor-pointer"
+                >
+                  <div className="flex items-start sm:items-center gap-3 min-w-0">
+                    <span className={cn(
+                      "px-2.5 py-0.5 text-[10px] font-bold rounded-md flex-shrink-0 uppercase tracking-wider",
+                      notice.category === '점검' && "bg-fall/10 text-fall",
+                      notice.category === '서비스' && "bg-brand-blue/10 text-brand-blue",
+                      notice.category === '안내' && "bg-slate-100 dark:bg-slate-800 text-slate-500"
+                    )}>
+                      {notice.category}
+                    </span>
+                    <span className="text-[15px] font-medium text-slate-700 dark:text-slate-200 group-hover:text-brand-blue transition-colors truncate">
+                      {notice.title}
+                    </span>
+                  </div>
+                  <span className="text-xs text-slate-400 font-medium whitespace-nowrap sm:text-right">
+                    {notice.date}
+                  </span>
                 </div>
-                <h4 className="font-bold text-slate-900 dark:text-white text-[16px]">HTS</h4>
-              </div>
-              <p className="text-[14px] text-slate-500 dark:text-slate-400 leading-relaxed">
-                초보에서 전문가까지 쉽게 사용할 수 있는 매매프로그램으로 주식, 모든 상품을 하나의 시스템으로 거래할 수 있는 통합 HTS입니다.
-              </p>
-            </div>
-
-            <div className="bg-slate-50/60 dark:bg-slate-900/40 p-6 rounded-2xl border border-black/5 dark:border-white/5 hover:border-brand-blue/30 dark:hover:border-brand-blue/30 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 flex items-center justify-center font-bold">
-                  <Globe className="w-5 h-5" />
-                </div>
-                <h4 className="font-bold text-slate-900 dark:text-white text-[16px]">WTS</h4>
-              </div>
-              <p className="text-[14px] text-slate-500 dark:text-slate-400 leading-relaxed">
-                PC(윈도우/맥), 태블릿(iPad, Galaxy tab), 스마트폰에서 별도 앱 설치 없이 사용이 가능합니다.
-              </p>
-            </div>
-
-            <div className="bg-slate-50/60 dark:bg-slate-900/40 p-6 rounded-2xl border border-black/5 dark:border-white/5 hover:border-brand-blue/30 dark:hover:border-brand-blue/30 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-950/50 dark:text-purple-400 flex items-center justify-center font-bold">
-                  <Code className="w-5 h-5" />
-                </div>
-                <h4 className="font-bold text-slate-900 dark:text-white text-[16px]">OPEN API</h4>
-              </div>
-              <p className="text-[14px] text-slate-500 dark:text-slate-400 leading-relaxed">
-                LS증권이 제공하는 OPEN API 서비스는 다양한 기능을 통해서 누구나 쉽게 원하는 앱과 프로그램을 개발할 수 있습니다.
-              </p>
+              ))}
             </div>
           </div>
         </div>
 
+        {/* 진행중인 이벤트 */}
+        <div className="glass rounded-[32px] p-8 shadow-xl border-white/40 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-rose-500 flex items-center justify-center">
+                  <Gift className="w-5 h-5" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display font-black">진행중인 이벤트</h3>
+              </div>
+              <button className="text-sm font-semibold text-slate-400 hover:text-rose-500 flex items-center gap-1 transition-colors">
+                더보기 <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              {EVENTS.map((event) => (
+                <div 
+                  key={event.id}
+                  className="group relative rounded-2xl p-5 border border-black/5 dark:border-white/5 bg-slate-50/50 dark:bg-slate-900/40 hover:border-rose-200 dark:hover:border-rose-900/40 hover:shadow-lg transition-all duration-300 flex items-start justify-between gap-4 overflow-hidden cursor-pointer"
+                >
+                  <div className="flex-1 min-w-0 flex flex-col justify-between h-full min-h-[96px]">
+                    <div>
+                      <span className="inline-block px-2.5 py-1 bg-rose-500/10 text-rose-500 dark:text-rose-400 text-[10px] font-bold rounded-md mb-2">
+                        {event.badge}
+                      </span>
+                      <h4 className="font-bold text-[14px] text-slate-900 dark:text-white leading-snug mb-1.5 group-hover:text-rose-500 transition-colors line-clamp-2">
+                        {event.title}
+                      </h4>
+                    </div>
+                    <p className="text-[11px] text-slate-400 whitespace-nowrap mt-auto">
+                      {event.period}
+                    </p>
+                  </div>
+                  <div className="w-20 h-20 rounded-xl overflow-hidden relative flex-shrink-0 border border-slate-100 dark:border-slate-800/60 bg-slate-100 dark:bg-slate-950">
+                    <img 
+                      src={event.img} 
+                      alt={event.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
