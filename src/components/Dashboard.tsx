@@ -17,6 +17,10 @@ import {
 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 
+// Import images statically so that Vite processes and resolves them correctly in production builds
+import eventInterestRateImg from '../assets/images/event_interest_rate_1782279198274.jpg';
+import eventPowermapMascotImg from '../assets/images/event_powermap_mascot_1782279215394.jpg';
+
 interface DashboardProps {
   isLoggedIn: boolean;
 }
@@ -47,14 +51,14 @@ const EVENTS = [
     title: '신용융자 금리할인 우량종목 우대금리 5.5%', 
     period: '2026.04.01 ~ 2026.12.31', 
     badge: '우대금리',
-    img: '/src/assets/images/event_interest_rate_1782279198274.jpg'
+    img: eventInterestRateImg
   },
   { 
     id: 2, 
     title: '파워맵프로 가입하고 실시간 수급 확인하기', 
     period: '2026.06.01 ~ 2026.07.31', 
     badge: '가입혜택',
-    img: '/src/assets/images/event_powermap_mascot_1782279215394.jpg'
+    img: eventPowermapMascotImg
   },
 ];
 

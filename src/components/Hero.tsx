@@ -4,6 +4,11 @@ import { ArrowRight, Sparkles, TrendingUp, Zap, Smartphone, Monitor, Globe, Chev
 import { LineChart, Line, ResponsiveContainer, YAxis } from 'recharts';
 import { cn } from '@/src/lib/utils';
 
+// Import images statically so that Vite processes and resolves them correctly in production builds
+import wtsIntroImg from '../assets/images/wts_intro_1782276920204.jpg';
+import htsIntroImg from '../assets/images/hts_intro_1782276932203.jpg';
+import mtsIntroImg from '../assets/images/mts_intro_1782276947427.jpg';
+
 const MOCK_DATA = Array.from({ length: 20 }, (_, i) => ({
   value: 4000 + Math.random() * 500 + Math.sin(i / 2) * 200
 }));
@@ -15,7 +20,7 @@ const CAROUSEL_SLIDES = [
     icon: Globe,
     title: '투혼 WTS (Web Trading System)',
     desc: 'PC, 태블릿, 스마트폰 브라우저에서 별도 프로그램이나 앱 설치 없이 접속하여 언제 어디서나 안전하고 편리하게 거래할 수 있는 차세대 트레이딩 시스템입니다.',
-    img: '/src/assets/images/wts_intro_1782276920204.jpg',
+    img: wtsIntroImg,
     colorClass: 'text-brand-blue bg-brand-blue/10'
   },
   {
@@ -24,7 +29,7 @@ const CAROUSEL_SLIDES = [
     icon: Monitor,
     title: '투혼 HTS (Home Trading System)',
     desc: '풍부하고 강력한 차트 분석 툴과 실시간 호가, 쾌속 주문 기능까지 탑재하여 초보부터 프로 투자자까지 모두 만족시키는 데스크톱 전용 통합 매매 프로그램입니다.',
-    img: '/src/assets/images/hts_intro_1782276932203.jpg',
+    img: htsIntroImg,
     colorClass: 'text-indigo-600 bg-indigo-50 dark:bg-indigo-950/40 dark:text-indigo-400'
   },
   {
@@ -33,7 +38,7 @@ const CAROUSEL_SLIDES = [
     icon: Smartphone,
     title: '투혼 MTS (Mobile Trading System)',
     desc: '다양한 거래 특화 모드와 실시간 수급 현황, 스마트 종목 검색 및 맞춤 자산 관리를 제공하여 최상의 투자를 완성하는 차세대 모바일 앱입니다.',
-    img: '/src/assets/images/mts_intro_1782276947427.jpg',
+    img: mtsIntroImg,
     colorClass: 'text-brand-mint bg-brand-mint/10'
   }
 ];
