@@ -20,6 +20,7 @@ import FinancialProductsIntro from './components/FinancialProductsIntro';
 import CustomerServiceIntro from './components/CustomerServiceIntro';
 import BusinessGuideIntro from './components/BusinessGuideIntro';
 import QrLoginModal from './components/QrLoginModal';
+import ChatBot from './components/ChatBot';
 import { motion, AnimatePresence } from 'motion/react';
 import { LogIn, LogOut } from 'lucide-react';
 
@@ -155,7 +156,7 @@ export default function App() {
         </AnimatePresence>
 
         {/* Floating Login Toggle for Demo */}
-        <div className="fixed bottom-8 right-8 z-50">
+        <div className="fixed bottom-8 left-8 z-50">
           <button
             onClick={() => setIsLoggedIn(!isLoggedIn)}
             className="flex items-center gap-2 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-6 py-3 rounded-full shadow-2xl font-bold hover:scale-105 transition-all active:scale-95"
@@ -176,6 +177,9 @@ export default function App() {
       </main>
 
       <Footer />
+
+      {/* AI ChatBot Assistant Widget */}
+      <ChatBot />
 
       {/* QR Code Login Modal */}
       <QrLoginModal

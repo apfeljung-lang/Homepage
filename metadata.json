@@ -1,5 +1,6 @@
 {
   "name": "Lucid Trust Securities",
   "description": "A clean, modern securities platform main page with real-time insights and AI-powered research.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
